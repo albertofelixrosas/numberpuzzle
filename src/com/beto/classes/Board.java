@@ -10,7 +10,6 @@ public class Board {
 
     private int size;
     private int[][] matrix = null;
-    //private int[] values = null;
 
     public Board(int size) {
         this.size = size;
@@ -143,16 +142,6 @@ public class Board {
         return value > 0 && value < (size * size);
     }
 
-    public boolean changeByNumberValue(int value) {
-        if (!isValidValue(value)) {
-            return false;
-        }
-        int[] locationOfValue = locationOfValueOnMatrix(value);
-        int[] locationOfZero = locationOfValueOnMatrix(0);
-
-        return isAbleToMove(locationOfValue, locationOfZero);
-    }
-
     public void performMoveByNumber(int value) throws NotAbleToMoveException, NotValidValueException {
         if (!isValidValue(value)) {
             throw new NotValidValueException();
@@ -188,7 +177,6 @@ public class Board {
 
     private void transformWhenTheValueIsLocatedOnTheLeft(int rowOfValue, int columnOfValue, int columnOfZero) {
         int[] theRow = matrix[rowOfValue];
-        // | 9| -> 10 <- | 11 | 13 | 0 | 12 |
         int countOfIterations = columnOfZero - columnOfValue;
         int index = columnOfZero;
         int i = 0;
@@ -207,7 +195,6 @@ public class Board {
 
     private void transformWhenTheValueIsLocatedOnTheRight(int rowOfValue, int columnOfValue, int columnOfZero) {
         int[] theRow = matrix[rowOfValue];
-        // | 9| 0 | 11 | 13 | -> 10 <- | 12 |
         int countOfIterations = columnOfValue - columnOfZero;
         int index = columnOfValue;
         int i = 0;
